@@ -10,26 +10,36 @@ on:
       - main  # or whichever branch you want
 
 jobs:
-  demo-job:
-    # ✅ Job-level variable
+  job1:
+    name: Job 1 - First Job
+    # 💼 Job-level variable (overrides workflow-level)
     env:
-      MY_JOB_VARIABLE: "This is a job-level variable"
+      MY_VAR: "Job 1 level value"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Show Workflow & Job Variables
+      - name: Step 1 - No override
         run: |
-          echo "Workflow Variable: $MY_WORKFLOW_VARIABLE"
-          echo "Job Variable: $MY_JOB_VARIABLE"
+          echo "Step 1: MY_VAR = $MY_VAR"
+          echo "Using context: ${{ env.MY_VAR }}"
 
-      - name: Step with its own variable
-        # ✅ Step-level variable
+      - name: Step 2 - Override MY_VAR at step level
         env:
-          MY_STEP_VARIABLE: "This is a step-level variable"
+          MY_VAR: "Step level value"
         run: |
-          echo "Workflow Variable: $MY_WORKFLOW_VARIABLE"
-          echo "Job Variable: $MY_JOB_VARIABLE"
-          echo "Step Variable: $MY_STEP_VARIABLE"
+          echo "Step 2: MY_VAR = $MY_VAR"
+          echo "Using context: ${{ env.MY_VAR }}"
 
+  job2:
+    name: Job 2 - See if job1's variable is visible
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Step 1 - Use MY_VAR in job2
+        run: |
+          echo "Job 2 Step: MY_VAR = $MY_VAR"
+          echo "Using context: ${{ env.MY_VAR }}"
