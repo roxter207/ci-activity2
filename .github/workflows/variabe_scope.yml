@@ -1,21 +1,14 @@
-# This is a basic workflow to help you get started with Actions
+name: GitHub Variable Scope Demo
 
-name: Github Variable Scope Demo
-
+# ✅ Workflow-level variable
 env:
-  MY_WORKFLOW_VARIABLE: "This is my workflow variable"
-# Controls when the workflow will run
+  MY_WORKFLOW_VARIABLE: "This is a workflow-level variable"
+
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # or whichever branch you want
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   demo-job:
     # ✅ Job-level variable
@@ -38,10 +31,5 @@ jobs:
         run: |
           echo "Workflow Variable: $MY_WORKFLOW_VARIABLE"
           echo "Job Variable: $MY_JOB_VARIABLE"
-          echo "Step Variable: $MY_STEP_VARIABLE
+          echo "Step Variable: $MY_STEP_VARIABLE"
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
