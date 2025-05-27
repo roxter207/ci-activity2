@@ -1,6 +1,6 @@
 name: API Key Secret Demo
 
-on:
+on: 
   push:
     branches:
       - main
