@@ -1,6 +1,13 @@
 import os
-import requests
 
-api_key = os.getenv("API_KEY")
-response = requests.get(f"https://api.example.com/data?apikey={api_key}")
-print(response.status_code)
+def main():
+    api_key = os.getenv("API_KEY")
+    if not api_key:
+        print("No API key provided!")
+        return
+
+    # Simulate calling an external API
+    print(f"Calling external API with key: {api_key[:4]}* (hidden)")
+
+if _name_ == "_main_":
+    main()
