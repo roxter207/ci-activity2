@@ -9,5 +9,5 @@ def main():
     # Simulate calling an external API
     print(f"Calling external API with key: {api_key[:4]}* (hidden)")
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     main()
